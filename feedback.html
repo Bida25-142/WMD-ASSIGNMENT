@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback | Modrich Motorcycles Botswana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">Modrich Motorcycles</div>
+      <nav class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="services.html">Services</a>
+        <a class="active" href="feedback.html">Feedback</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Feedback</h1>
+      <p class="muted">Tell us about your experience. We use your feedback to improve our products and support.</p>
+    </section>
+    <section class="card">
+      <form class="form" id="feedback-form">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" required>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="name@example.com" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Share your thoughts" required></textarea>
+
+        <button class="btn" id="submit-btn" type="submit" disabled>Send Feedback</button>
+      </form>
+      <p id="thank-you-message" class="thank-you" hidden>Thank you for your feedback. We appreciate your response.</p>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const form = document.getElementById("feedback-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const thankYouMessage = document.getElementById("thank-you-message");
+      const fields = [
+        document.getElementById("name"),
+        document.getElementById("email"),
+        document.getElementById("message")
+      ];
+
+      function validateForm() {
+        const allFilled = fields.every(function (field) {
+          return field.value.trim() !== "";
+        });
+        submitBtn.disabled = !allFilled;
+      }
+
+      fields.forEach(function (field) {
+        field.addEventListener("input", validateForm);
+      });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        validateForm();
+        if (submitBtn.disabled) return;
+
+        form.reset();
+        submitBtn.disabled = true;
+        thankYouMessage.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Modrich Motorcycles Botswana</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">Modrich Motorcycles</div>
+      <nav class="nav-links">
+        <a class="active" href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="services.html">Services</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Ride Bold. Ride Modern.</h1>
+      <p>Explore performance bikes, trusted aftersales support, and sleek design in one place. Built for riders in Botswana who value speed, style, and reliability.</p>
+      <a class="btn" href="shop.html">Browse Shop</a>
+    </section>
+
+    <section>
+      <h2 class="section-title">Featured Motorcycles</h2>
+      <div class="slideshow" id="featured-slideshow">
+        <div class="slide active">
+          <img src="https://i.pinimg.com/736x/2a/f9/5e/2af95eee666c41703ce9140bd426c0e6.jpg" alt="BMW S1000RR featured bike">
+          <div class="slide-caption">BMW S1000RR - Precision superbike performance.</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.pinimg.com/736x/45/6e/2a/456e2a937147c61951ad1277c2a2b686.jpg" alt="Ducati Panigale V4 featured bike">
+          <div class="slide-caption">Ducati Panigale V4 - Aggressive style and power.</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.pinimg.com/736x/81/d5/87/81d587d4795c2343673e99787805df9b.jpg" alt="Aprilia RSV4 featured bike">
+          <div class="slide-caption">Aprilia RSV4 - Track-ready technology and control.</div>
+        </div>
+        <button class="slide-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+        <button class="slide-btn next" type="button" aria-label="Next slide">&#10095;</button>
+      </div>
+      <div class="slide-dots" id="slide-dots"></div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Why Riders Choose Us</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Premium Bikes</h3>
+          <p class="muted">Top motorcycle brands with competitive prices and quality assurance.</p>
+        </article>
+        <article class="card">
+          <h3>Fast Support</h3>
+          <p class="muted">Responsive customer care and service support throughout ownership.</p>
+        </article>
+        <article class="card">
+          <h3>Aftersales Care</h3>
+          <p class="muted">Maintenance guidance, genuine parts, and trained technical assistance.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">Modrich Motorcycles Botswana</div>
+  </footer>
+
+  <script>
+    (function () {
+      const slideshow = document.getElementById("featured-slideshow");
+      if (!slideshow) return;
+      const slides = Array.from(slideshow.querySelectorAll(".slide"));
+      const dotsWrap = document.getElementById("slide-dots");
+      const prevBtn = slideshow.querySelector(".prev");
+      const nextBtn = slideshow.querySelector(".next");
+      let current = 0;
+      let timer;
+
+      slides.forEach(function (_, index) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "dot" + (index === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Go to slide " + (index + 1));
+        dot.addEventListener("click", function () {
+          show(index);
+          restart();
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsWrap.querySelectorAll(".dot"));
+
+      function show(index) {
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add("active");
+        dots[current].classList.add("active");
+      }
+
+      function next() {
+        show(current + 1);
+      }
+
+      function previous() {
+        show(current - 1);
+      }
+
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(next, 4200);
+      }
+
+      nextBtn.addEventListener("click", function () {
+        next();
+        restart();
+      });
+
+      prevBtn.addEventListener("click", function () {
+        previous();
+        restart();
+      });
+
+      restart();
+    })();
+  </script>
+</body>
+</html>
